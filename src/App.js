@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useState} from 'react';
+import Header from './components/Header';
+import Main from './components/Main';
+import Basket from './components/Basket'
+import './index.css'
+import data from './components/data'
 
-function App() {
+const  App=()=> {
+
+  const {products} = data;
+
+  const [cartItems, setcartItems] = useState([])
+  const onAdd=(product)=>{
+    const exist=cartItems.find(x=>x.id=== product.id)
+    if(exist){
+      setcartItems(cartItems.map(x=>x.id===product.id?{...exist,qty:exist.qty +1} :x))
+    
+  }}
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <Header />
+     <div className='row'>
+       <Main products={products}/>
+       <Basket cartItems={cartItems}/>
+     </div>
     </div>
   );
 }
