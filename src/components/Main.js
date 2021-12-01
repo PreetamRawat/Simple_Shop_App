@@ -3,14 +3,14 @@ import '../index.css'
 import Product from './Product';
 
 const Main = (props) => {
-    const {products}= props;
+    const {products,onAdd}= props;
     return (
         <main className='block col-2'>
           <h2>Products</h2>
           <div className='row'>
             {products.map((product)=>{
                 return(
-                <Product key={product.id} product={product} />
+                <Product key={product.id} product={product} onAdd={onAdd}/>
                 )
             })}
           </div>   
